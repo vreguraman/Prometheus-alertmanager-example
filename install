@@ -38,5 +38,11 @@ INSTALL PLUGIN
 3. Prometheus metrics
 
 
+influx
+use jenkins
+SHOW MEASUREMENTS ==> to vieww the tables got creating after running the jenkins jobs
+
+
+
 
 
