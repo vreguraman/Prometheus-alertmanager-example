@@ -1,1 +1,42 @@
-doc
+Docket installation
+==================
+sudo apt-get update -y
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-key fingerprint 0EBFCD88
+sudo apt-get update -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y 
+
+Jenkins installation
+===================
+docker run -d -p 8080:8080 --name jenkins jenkins/jenkins:lts-jdk11
+
+docker run -d --name prometheus-container -v /home/ubuntu/prometheus.yml:/etc/prometheus/prometheus.yml -e TZ=UTC -p 9090:9090 ubuntu/prometheus:2.33-22.04_beta
+
+docker run -d --name=grafana -p 3000:3000 grafana/grafana:8.5.5
+
+docker run -d -p 8086:8086 --name influxdb2 influxdb:1.8.6-alpine
+
+jenkins - jenkins
+grafana default id/pass - admin/admin
+
+connect to influx db
+docker exec -it 9da968d55489 bash
+
+docker exec -it influxdb2 bash 
+influx
+CREATE DATABASE "jenkins" WITH DURATION 1825d REPLICATION 1 NAME "jenkins-retention"
+SHOW DATABASES
+USE <database_name>
+
+JENKINS
+
+INSTALL PLUGIN
+1. INFLUXDB
+2. JOB & STAGE MONITORING
+3. Prometheus metrics
+
+
+
+
